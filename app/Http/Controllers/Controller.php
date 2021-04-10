@@ -13,7 +13,7 @@ class Controller extends BaseController{
     public function index(){
         $data['data'] = \DB::table('client')
 		// ->join('category','product.CatId', '=', 'category.CatId')
-		->select('firstName')
+		->select('clientId', 'firstName', 'lastName', 'contactNo', 'currentLevel')
 		// ->orderBy('name')
 		->get();
 
