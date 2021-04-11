@@ -24,6 +24,11 @@
     @include('navbar')
 
     <div class="container">
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Search Customer:</label>
+            <input type="text" class="form-control" aria-describedby="searchHelp" onkeypress="searchCustomer()"">
+            <div id="searchHelp" class="form-text">Search by firstname, lastname or mobile number.</div>
+        </div>
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -36,17 +41,19 @@
             </thead>
             @foreach ($data as $d)
             <tr>
-                <th scope="row">1</th>
+                <th scope="row">{{ $d->clientId}}</th>
                 <td> {{ $d->firstName }}</td>
                 <td> {{ $d->lastName }}</td>
                 <td> {{ $d->contactNo }}</td>
-                <td> {{ $d->currentLevel }}</td>
+                <td> {{ $d->levelName }}</td>
             </tr>
 
             @endforeach
         </table>
     </div>
 
+  
+    <script type="text/javascript" src="{{asset('js/index.js')}}"></script>
 
 </body>
 

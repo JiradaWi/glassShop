@@ -12,9 +12,8 @@ class Controller extends BaseController{
 
     public function index(){
         $data['data'] = \DB::table('client')
-		// ->join('category','product.CatId', '=', 'category.CatId')
-		->select('clientId', 'firstName', 'lastName', 'contactNo', 'currentLevel')
-		// ->orderBy('name')
+		->select('clientId', 'firstName', 'lastName', 'contactNo', 'currentLevel', 'customerlevel.levelName')
+		->join('customerlevel', 'client.clientId', '=', 'customerlevel.levelId')		
 		->get();
 
 		// $data['cat'] = \DB::table('category')->get();
