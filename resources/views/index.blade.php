@@ -26,9 +26,17 @@
 
     <div class="container">
         <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Search Customer:</label>
-            <input type="text" class="form-control" aria-describedby="searchHelp" onkeyup="searchCustomer(event)" name="searchKeyword">
-            <div id="searchHelp" class="form-text">Search by firstname, lastname or mobile number.</div>
+            <div class="row">
+                <div class="col-10">
+                    <label for="exampleInputEmail1" class="form-label">Search Customer:</label>
+                    <input type="text" class="form-control" aria-describedby="searchHelp" onkeyup="searchCustomer(event)" name="searchKeyword">
+                    <div id="searchHelp" class="form-text">Search by firstname, lastname or mobile number.</div>
+                </div>
+                <div class="col-2">
+                    <button type="button" class="btn btn-primary" style="margin-top:16%" data-bs-toggle="modal" data-bs-target="#newCustomerModal">New Customer</button>
+                </div>
+
+            </div>
         </div>
         <table class="table table-hover">
             <thead>
@@ -52,6 +60,25 @@
                 @endforeach
             </tbody>
         </table>
+    </div>
+
+    <!--New Customer Modal-->  
+    <div class="modal fade" id="newCustomerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">New Customer</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Form goes here
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
     </div>
 
 

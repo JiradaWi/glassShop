@@ -17,12 +17,9 @@ class Controller extends BaseController
 	public function index()
 	{
 		$data['data'] = \DB::table('client')
-			//	->select('clientId', 'firstName', 'lastName', 'contactNo', 'currentLevel')
 			->select('clientId', 'firstName', 'lastName', 'contactNo', 'currentLevel', 'customerlevel.levelName')
 			->join('customerlevel', 'client.currentLevel', '=', 'customerlevel.levelId')
 			->get();
-
-		// $data['cat'] = \DB::table('category')->get();
 
 		return view('index', $data);
 	}
