@@ -6,18 +6,48 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Http\Request;
 
-class Controller extends BaseController{
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+use function PHPUnit\Framework\isEmpty;
 
-    public function index(){
-        $data['data'] = \DB::table('client')
-		->select('clientId', 'firstName', 'lastName', 'contactNo', 'currentLevel', 'customerlevel.levelName')
-		->join('customerlevel', 'client.clientId', '=', 'customerlevel.levelId')		
-		->get();
+class Controller extends BaseController
+{
+	use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+	public function index()
+	{
+		$data['data'] = \DB::table('client')
+			//	->select('clientId', 'firstName', 'lastName', 'contactNo', 'currentLevel')
+			->select('clientId', 'firstName', 'lastName', 'contactNo', 'currentLevel', 'customerlevel.levelName')
+			->join('customerlevel', 'client.currentLevel', '=', 'customerlevel.levelId')
+			->get();
 
 		// $data['cat'] = \DB::table('category')->get();
-		
-    	return view('index', $data);
-    }
+
+		return view('index', $data);
+	}
+
+	public function searchCustomer(Request $Request)
+	{
+		$searchKeyword = $Request->keyword;
+		if ($searchKeyword!='') {
+			$searchKeyword = $searchKeyword . '%';
+			$data['data'] = \DB::table('client')
+				->select('clientId', 'firstName', 'lastName', 'contactNo', 'currentLevel', 'customerlevel.levelName')
+				->join('customerlevel', 'client.currentLevel', '=', 'customerlevel.levelId')
+				->where('firstName', 'like', $searchKeyword)
+				->orWhere('lastName', 'like', $searchKeyword)
+				->orWhere('contactNo', 'like', $searchKeyword)
+				->get();
+
+			return $data;
+		}else{
+			$data['data'] = \DB::table('client')
+			->select('clientId', 'firstName', 'lastName', 'contactNo', 'currentLevel', 'customerlevel.levelName')
+			->join('customerlevel', 'client.currentLevel', '=', 'customerlevel.levelId')
+			->get();
+			
+			return $data;
+		}
+	}
 }

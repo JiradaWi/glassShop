@@ -17,3 +17,4 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 Route::get('/', 'App\Http\Controllers\controller@index');
+Route::post('/search', 'App\Http\Controllers\controller@searchCustomer');

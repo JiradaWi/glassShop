@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Laravel</title>
 
@@ -26,7 +27,7 @@
     <div class="container">
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Search Customer:</label>
-            <input type="text" class="form-control" aria-describedby="searchHelp" onkeypress="searchCustomer()"">
+            <input type="text" class="form-control" aria-describedby="searchHelp" onkeyup="searchCustomer(event)" name="searchKeyword">
             <div id="searchHelp" class="form-text">Search by firstname, lastname or mobile number.</div>
         </div>
         <table class="table table-hover">
@@ -39,22 +40,25 @@
                     <th scope="col">Customer Level</th>
                 </tr>
             </thead>
-            @foreach ($data as $d)
-            <tr>
-                <th scope="row">{{ $d->clientId}}</th>
-                <td> {{ $d->firstName }}</td>
-                <td> {{ $d->lastName }}</td>
-                <td> {{ $d->contactNo }}</td>
-                <td> {{ $d->levelName }}</td>
-            </tr>
-
-            @endforeach
+            <tbody id="clientInformation">
+                @foreach ($data as $d)
+                <tr>
+                    <td>{{ $d->clientId}}</td>
+                    <td> {{ $d->firstName }}</td>
+                    <td> {{ $d->lastName }}</td>
+                    <td> {{ $d->contactNo }}</td>
+                    <td> {{ $d->levelName }}</td>
+                </tr>
+                @endforeach
+            </tbody>
         </table>
     </div>
 
-  
-    <script type="text/javascript" src="{{asset('js/index.js')}}"></script>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="{{asset('js/index.js')}}"></script>
 </body>
 
 </html>
