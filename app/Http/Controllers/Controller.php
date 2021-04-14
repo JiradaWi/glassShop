@@ -14,8 +14,7 @@ class Controller extends BaseController
 {
 	use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-	public function index()
-	{
+	public function index() {
 		$data['data'] = \DB::table('client')
 			->select('clientId', 'firstName', 'lastName', 'contactNo', 'currentLevel', 'customerlevel.levelName')
 			->join('customerlevel', 'client.currentLevel', '=', 'customerlevel.levelId')
@@ -28,8 +27,7 @@ class Controller extends BaseController
 		return view('index', $data);
 	}
 
-	public function searchCustomer(Request $Request)
-	{
+	public function searchCustomer(Request $Request) {
 		$searchKeyword = $Request->keyword;
 		if ($searchKeyword!='') {
 			$searchKeyword = $searchKeyword . '%';
@@ -50,5 +48,16 @@ class Controller extends BaseController
 			
 			return $data;
 		}
+	}
+
+	public function newClient(Request $Request){
+		\DB::table('client')->insert([
+			'firstName'		=> $Request->firstName,
+			'lastName'		=> $Request->lastName,
+			'birthDate'		=> $Request->birthDate,
+			'contactNo'		=> $Request->contactNo,
+			'currentLevel'	=> $Request->customerLevel
+		]);
+		$this->index();
 	}
 }

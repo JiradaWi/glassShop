@@ -64,7 +64,8 @@
 
     <!--New Customer Modal-->
     <div class="modal fade" id="newCustomerModal" tabindex="-1" aria-labelledby="newCustomer" aria-hidden="true">
-        <form>
+        <form method="POST" action="/newClient">
+            @csrf
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -77,13 +78,13 @@
                             <div class="col-md-6 col-sm-6">
                                 <div class="mb-3">
                                     <label for="firstName" class="form-label">First Name</label>
-                                    <input type="text" class="form-control" id="firstName" placeholder="">
+                                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="">
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-6">
                                 <div class="mb-3">
                                     <label for="lastName" class="form-label">Last Name</label>
-                                    <input type="text" class="form-control" id="lastName" placeholder="">
+                                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="">
                                 </div>
                             </div>
                         </div>
@@ -91,7 +92,7 @@
                             <div class="col">
                                 <div class="mb-3">
                                     <label for="birthdate" class="form-label">Birthdate</label>
-                                    <input type="date" class="form-control" id="Birthdate" placeholder="">
+                                    <input type="date" class="form-control" id="Birthdate" name="birthDate" placeholder="">
                                 </div>
                             </div>
                         </div>
@@ -99,7 +100,7 @@
                             <div class="col">
                                 <div class="mb-3">
                                     <label for="contactNo" class="form-label">Contact Number</label>
-                                    <input type="text" class="form-control" id="contactNo" placeholder="">
+                                    <input type="text" class="form-control" id="contactNo" name="contactNo" placeholder="">
                                 </div>
                             </div>
                         </div>
@@ -107,7 +108,7 @@
                             <div class="col">
                                 <div class="mb-3">
                                     <label for="customerLevel" class="form-label">Customer Level</label>
-                                    <select class="form-select" id="customerLevel">
+                                    <select class="form-select" id="customerLevel" name="customerLevel">
                                         @foreach ($level as $l)
                                         <option value="{{ $l->levelId }}">{{ $l->levelName }}</option>
                                         @endforeach
@@ -119,7 +120,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <input type="submit" class="btn btn-primary">   
                     </div>
                 </div>
             </div>

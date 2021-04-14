@@ -18,3 +18,4 @@ use Illuminate\Support\Facades\Route;
 // });
 Route::get('/', 'App\Http\Controllers\controller@index');
 Route::post('/search', 'App\Http\Controllers\controller@searchCustomer');
+Route::post('/newClient', 'App\Http\Controllers\controller@newClient');
