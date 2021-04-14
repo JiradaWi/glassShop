@@ -28,8 +28,8 @@
         <div class="mb-3">
             <div class="row">
                 <div class="col-10">
-                    <label for="exampleInputEmail1" class="form-label">Search Customer:</label>
-                    <input type="text" class="form-control" aria-describedby="searchHelp" onkeyup="searchCustomer(event)" name="searchKeyword">
+                    <label for="searchCustomer" class="form-label">Search Customer:</label>
+                    <input id="searchCustomer" type="text" class="form-control" aria-describedby="searchHelp" onkeyup="searchCustomer(event)" name="searchKeyword">
                     <div id="searchHelp" class="form-text">Search by firstname, lastname or mobile number.</div>
                 </div>
                 <div class="col-2">
@@ -51,34 +51,79 @@
             <tbody id="clientInformation">
                 @foreach ($data as $d)
                 <tr>
-                    <td>{{ $d->clientId}}</td>
-                    <td> {{ $d->firstName }}</td>
-                    <td> {{ $d->lastName }}</td>
-                    <td> {{ $d->contactNo }}</td>
-                    <td> {{ $d->levelName }}</td>
+                    <td> {{ $d->clientId }} </td>
+                    <td> {{ $d->firstName }} </td>
+                    <td> {{ $d->lastName }} </td>
+                    <td> {{ $d->contactNo }} </td>
+                    <td> {{ $d->levelName }} </td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
 
-    <!--New Customer Modal-->  
-    <div class="modal fade" id="newCustomerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">New Customer</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Form goes here
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+    <!--New Customer Modal-->
+    <div class="modal fade" id="newCustomerModal" tabindex="-1" aria-labelledby="newCustomer" aria-hidden="true">
+        <form>
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="newCustomer">New Customer</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6">
+                                <div class="mb-3">
+                                    <label for="firstName" class="form-label">First Name</label>
+                                    <input type="text" class="form-control" id="firstName" placeholder="">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="mb-3">
+                                    <label for="lastName" class="form-label">Last Name</label>
+                                    <input type="text" class="form-control" id="lastName" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label for="birthdate" class="form-label">Birthdate</label>
+                                    <input type="date" class="form-control" id="Birthdate" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label for="contactNo" class="form-label">Contact Number</label>
+                                    <input type="text" class="form-control" id="contactNo" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label for="customerLevel" class="form-label">Customer Level</label>
+                                    <select class="form-select" id="customerLevel">
+                                        @foreach ($level as $l)
+                                        <option value="{{ $l->levelId }}">{{ $l->levelName }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 
 

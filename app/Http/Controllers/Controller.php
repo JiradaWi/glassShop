@@ -21,6 +21,10 @@ class Controller extends BaseController
 			->join('customerlevel', 'client.currentLevel', '=', 'customerlevel.levelId')
 			->get();
 
+		$data['level'] = \DB::table('customerlevel')
+			->select('levelId', 'levelName')	
+			->get();
+
 		return view('index', $data);
 	}
 
