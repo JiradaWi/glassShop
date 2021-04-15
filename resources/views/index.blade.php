@@ -24,7 +24,16 @@
 <body class="antialiased">
     @include('navbar')
 
+
+
     <div class="container">
+        <br />
+        <div id="addClientAlert" style="display: none">
+            <div class="alert alert-success" role="alert">
+                Client created!
+            </div>
+        </div>
+
         <div class="mb-3">
             <div class="row">
                 <div class="col-10">
@@ -64,7 +73,8 @@
 
     <!--New Customer Modal-->
     <div class="modal fade" id="newCustomerModal" tabindex="-1" aria-labelledby="newCustomer" aria-hidden="true">
-        <form method="POST" action="/newClient">
+        <!-- <form method="POST" action="/newClient"> -->
+        <form id="newClientForm">
             @csrf
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -119,8 +129,8 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <input type="submit" class="btn btn-primary">   
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeNewClientBtn">Close</button>
+                        <button type="button" onclick="submitNewCLient()" class="btn btn-primary">Save</button>
                     </div>
                 </div>
             </div>

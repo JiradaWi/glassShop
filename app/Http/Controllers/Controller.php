@@ -50,7 +50,7 @@ class Controller extends BaseController
 		}
 	}
 
-	public function newClient(Request $Request){
+	public function newClient(Request $Request) {
 		\DB::table('client')->insert([
 			'firstName'		=> $Request->firstName,
 			'lastName'		=> $Request->lastName,
@@ -58,6 +58,11 @@ class Controller extends BaseController
 			'contactNo'		=> $Request->contactNo,
 			'currentLevel'	=> $Request->customerLevel
 		]);
-		$this->index();
+		$data['data'] = \DB::table('client')
+		->select('clientId', 'firstName', 'lastName', 'contactNo', 'currentLevel', 'customerlevel.levelName')
+		->join('customerlevel', 'client.currentLevel', '=', 'customerlevel.levelId')
+		->get();
+
+		return 	$data;
 	}
 }
