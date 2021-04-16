@@ -14,22 +14,24 @@ class Controller extends BaseController
 {
 	use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-	public function index() {
+	public function index()
+	{
 		$data['data'] = \DB::table('client')
 			->select('clientId', 'firstName', 'lastName', 'contactNo', 'currentLevel', 'customerlevel.levelName')
 			->join('customerlevel', 'client.currentLevel', '=', 'customerlevel.levelId')
 			->get();
 
 		$data['level'] = \DB::table('customerlevel')
-			->select('levelId', 'levelName')	
+			->select('levelId', 'levelName')
 			->get();
 
 		return view('index', $data);
 	}
 
-	public function searchCustomer(Request $Request) {
+	public function searchCustomer(Request $Request)
+	{
 		$searchKeyword = $Request->keyword;
-		if ($searchKeyword!='') {
+		if ($searchKeyword != '') {
 			$searchKeyword = $searchKeyword . '%';
 			$data['data'] = \DB::table('client')
 				->select('clientId', 'firstName', 'lastName', 'contactNo', 'currentLevel', 'customerlevel.levelName')
@@ -40,17 +42,18 @@ class Controller extends BaseController
 				->get();
 
 			return $data;
-		}else{
+		} else {
 			$data['data'] = \DB::table('client')
-			->select('clientId', 'firstName', 'lastName', 'contactNo', 'currentLevel', 'customerlevel.levelName')
-			->join('customerlevel', 'client.currentLevel', '=', 'customerlevel.levelId')
-			->get();
-			
+				->select('clientId', 'firstName', 'lastName', 'contactNo', 'currentLevel', 'customerlevel.levelName')
+				->join('customerlevel', 'client.currentLevel', '=', 'customerlevel.levelId')
+				->get();
+
 			return $data;
 		}
 	}
 
-	public function newClient(Request $Request) {
+	public function newClient(Request $Request)
+	{
 		\DB::table('client')->insert([
 			'firstName'		=> $Request->firstName,
 			'lastName'		=> $Request->lastName,
@@ -59,23 +62,46 @@ class Controller extends BaseController
 			'currentLevel'	=> $Request->customerLevel
 		]);
 		$data['data'] = \DB::table('client')
-		->select('clientId', 'firstName', 'lastName', 'contactNo', 'currentLevel', 'customerlevel.levelName')
-		->join('customerlevel', 'client.currentLevel', '=', 'customerlevel.levelId')
-		->get();
+			->select('clientId', 'firstName', 'lastName', 'contactNo', 'currentLevel', 'customerlevel.levelName')
+			->join('customerlevel', 'client.currentLevel', '=', 'customerlevel.levelId')
+			->get();
 
 		return 	$data;
 	}
 
-	public function viewClient($clientId){
-		 $clientData = \DB::table('client')
-		->select('clientId', 'firstName', 'lastName', 'contactNo', 'currentLevel', 'birthDate','customerlevel.levelName')
-		->join('customerlevel', 'client.currentLevel', '=', 'customerlevel.levelId')
-		->where('clientId', '=', $clientId)
-		->limit(1)
-		->get();
+	public function viewClient($clientId)
+	{
+		$clientData = \DB::table('client')
+			->select('clientId', 'firstName', 'lastName', 'contactNo', 'currentLevel', 'birthDate', 'customerlevel.levelName')
+			->join('customerlevel', 'client.currentLevel', '=', 'customerlevel.levelId')
+			->where('clientId', '=', $clientId)
+			->limit(1)
+			->get();
 
 		$data['data'] =  $clientData[0];
-	//	$data['clientId'] = $clientId;
+
+		$data['level'] = \DB::table('customerlevel')
+			->select('levelId', 'levelName')
+			->get();
+		//	$data['clientId'] = $clientId;
 		return view('clientRecord', $data);
+	}
+
+	public function updateClient(Request $request)
+	{
+		\DB::table('client')
+			->where('clientId', $request->clientId)
+			->update(
+				array(
+					'firstName'		=> $request->firstName,
+					'lastName'		=> $request->lastName,
+					'birthDate'		=> $request->birthDate,
+					'contactNo'		=> $request->contactNo,
+					'currentLevel'	=> $request->customerLevel
+				)
+			);
+
+		$data['status'] = 'success';
+		return $data;
 	}
 }

@@ -22,3 +22,4 @@ Route::post('/search', 'App\Http\Controllers\controller@searchCustomer');
 Route::post('/newClient', 'App\Http\Controllers\controller@newClient');
 
 Route::get('/client/{clientId}', 'App\Http\Controllers\controller@viewClient');
+Route::post('/updateClient', 'App\Http\Controllers\controller@updateClient');
