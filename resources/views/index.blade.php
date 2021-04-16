@@ -59,7 +59,7 @@
             </thead>
             <tbody id="clientInformation">
                 @foreach ($data as $d)
-                <tr>
+                <tr onclick="window.location = '/client/{{$d->clientId}}'" >
                     <td> {{ $d->clientId }} </td>
                     <td> {{ $d->firstName }} </td>
                     <td> {{ $d->lastName }} </td>

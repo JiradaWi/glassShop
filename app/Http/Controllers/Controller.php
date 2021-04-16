@@ -65,4 +65,17 @@ class Controller extends BaseController
 
 		return 	$data;
 	}
+
+	public function viewClient($clientId){
+		 $clientData = \DB::table('client')
+		->select('clientId', 'firstName', 'lastName', 'contactNo', 'currentLevel', 'birthDate','customerlevel.levelName')
+		->join('customerlevel', 'client.currentLevel', '=', 'customerlevel.levelId')
+		->where('clientId', '=', $clientId)
+		->limit(1)
+		->get();
+
+		$data['data'] =  $clientData[0];
+	//	$data['clientId'] = $clientId;
+		return view('clientRecord', $data);
+	}
 }
