@@ -18,7 +18,7 @@ class Controller extends BaseController
 	{
 		$data['data'] = \DB::table('client')
 			->select('clientId', 'firstName', 'lastName', 'contactNo', 'currentLevel', 'customerlevel.levelName')
-			->join('customerlevel', 'client.currentLevel', '=', 'customerlevel.levelId')
+			->leftJoin('customerlevel', 'client.currentLevel', '=', 'customerlevel.levelId')
 			->get();
 
 		$data['level'] = \DB::table('customerlevel')
@@ -35,7 +35,7 @@ class Controller extends BaseController
 			$searchKeyword = $searchKeyword . '%';
 			$data['data'] = \DB::table('client')
 				->select('clientId', 'firstName', 'lastName', 'contactNo', 'currentLevel', 'customerlevel.levelName')
-				->join('customerlevel', 'client.currentLevel', '=', 'customerlevel.levelId')
+				->leftJoin('customerlevel', 'client.currentLevel', '=', 'customerlevel.levelId')
 				->where('firstName', 'like', $searchKeyword)
 				->orWhere('lastName', 'like', $searchKeyword)
 				->orWhere('contactNo', 'like', $searchKeyword)
@@ -45,7 +45,7 @@ class Controller extends BaseController
 		} else {
 			$data['data'] = \DB::table('client')
 				->select('clientId', 'firstName', 'lastName', 'contactNo', 'currentLevel', 'customerlevel.levelName')
-				->join('customerlevel', 'client.currentLevel', '=', 'customerlevel.levelId')
+				->leftJoin('customerlevel', 'client.currentLevel', '=', 'customerlevel.levelId')
 				->get();
 
 			return $data;
@@ -63,7 +63,7 @@ class Controller extends BaseController
 		]);
 		$data['data'] = \DB::table('client')
 			->select('clientId', 'firstName', 'lastName', 'contactNo', 'currentLevel', 'customerlevel.levelName')
-			->join('customerlevel', 'client.currentLevel', '=', 'customerlevel.levelId')
+			->leftJoin('customerlevel', 'client.currentLevel', '=', 'customerlevel.levelId')
 			->get();
 
 		return 	$data;
@@ -73,7 +73,7 @@ class Controller extends BaseController
 	{
 		$clientData = \DB::table('client')
 			->select('clientId', 'firstName', 'lastName', 'contactNo', 'currentLevel', 'birthDate', 'customerlevel.levelName')
-			->join('customerlevel', 'client.currentLevel', '=', 'customerlevel.levelId')
+			->leftjoin('customerlevel', 'client.currentLevel', '=', 'customerlevel.levelId')
 			->where('clientId', '=', $clientId)
 			->limit(1)
 			->get();
@@ -83,7 +83,7 @@ class Controller extends BaseController
 		$data['level'] = \DB::table('customerlevel')
 			->select('levelId', 'levelName')
 			->get();
-		//	$data['clientId'] = $clientId;
+
 		return view('clientRecord', $data);
 	}
 

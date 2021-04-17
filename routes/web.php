@@ -23,3 +23,5 @@ Route::post('/newClient', 'App\Http\Controllers\controller@newClient');
 
 Route::get('/client/{clientId}', 'App\Http\Controllers\controller@viewClient');
 Route::post('/updateClient', 'App\Http\Controllers\controller@updateClient');
+
+Route::get('/newEyesight/{clientId}', 'App\Http\Controllers\eyeSightController@newEyeSight');

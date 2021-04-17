@@ -24,8 +24,7 @@ function searchCustomer(event) {
 
                     var tabledetail = '';
                     for (var i = 0; i < response.data.length; i++) {
-
-                        tabledetail += '<tr>';
+                        tabledetail += '<tr onclick="location.href=\'/client/'+data[i].clientId+'\'">';
                         tabledetail += '<td>' + data[i].clientId + '</td>';
                         tabledetail += '<td>' + data[i].firstName + '</td>';
                         tabledetail += '<td>' + data[i].lastName + '</td>';
@@ -73,8 +72,7 @@ function submitNewCLient() {
 
                 var tabledetail = '';
                 for (var i = 0; i < response.data.length; i++) {
-
-                    tabledetail += '<tr>';
+                    tabledetail += '<tr onclick="location.href=\'/client/'+data[i].clientId+'\'">';
                     tabledetail += '<td>' + data[i].clientId + '</td>';
                     tabledetail += '<td>' + data[i].firstName + '</td>';
                     tabledetail += '<td>' + data[i].lastName + '</td>';

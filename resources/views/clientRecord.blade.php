@@ -31,8 +31,20 @@
 
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title"> {{ $data->clientId }} {{ $data->firstName }} {{ $data->lastName }}</h5>
-                <h6 class="card-subtitle mb-12 text-muted">{{ $data->levelName }}</h6>
+                <div class="row">
+                    <div class="col-6">
+                        <h5 class="card-title"> {{ $data->clientId }} {{ $data->firstName }} {{ $data->lastName }}</h5>
+                        <h6 class="card-subtitle mb-12 text-muted">{{ $data->levelName }}</h6>
+                    </div>
+                    <div class="col-6" style="text-align: right;">
+                        <div class="btn-group" role="group" aria-label="Basic example">                            
+                            <button type="button" class="btn btn-primary" onclick="window.location = '/newEyesight/{{ $data->clientId }}'">New Eyesight</button>
+                            <button type="button" data-bs-target="#editClient" data-bs-toggle="modal" class="btn btn-primary">Edit</button>
+                            <!-- <button type="button" class="btn btn-primary">Right</button> -->
+                        </div>
+                       
+                    </div>
+                </div>
                 <p class="card-text">
                 <div class="mb-3 row">
                     <label for="staticEmail" class="col-sm-2 col-form-label">Contact: </label>
@@ -47,7 +59,7 @@
                     </div>
                 </div>
                 </p>
-                <button type="button" data-bs-target="#editClient" data-bs-toggle="modal" class="btn btn-primary">Edit</button>
+                <!-- <button type="button" data-bs-target="#editClient" data-bs-toggle="modal" class="btn btn-primary">Edit</button> -->
             </div>
         </div>
     </div>
