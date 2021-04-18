@@ -83,6 +83,12 @@ class Controller extends BaseController
 		$data['level'] = \DB::table('customerlevel')
 			->select('levelId', 'levelName')
 			->get();
+		
+		$data['eyeSightList'] = \DB::table('eyesight')
+			->select('leftEye', 'rightEye', 'remark', 'dateMeasure')
+			->where('clientId', '=', $clientId)
+			->orderBy('dateMeasure', 'desc')
+			->get();
 
 		return view('clientRecord', $data);
 	}

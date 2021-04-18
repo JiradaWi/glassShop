@@ -31,7 +31,7 @@ function saveEyesight(){
             }
         },
         error: function (data) {
-            console.log('dead: '+JSON.stringify(data)));
+            console.log('dead: '+JSON.stringify(data));
         }
     });
 }

@@ -28,38 +28,92 @@
 
     <div class="container">
         <br />
+        <div class="row">
+            <!--Client Card-->
+            <div class="col-12 col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-6">
+                                <h5 class="card-title"> {{ $data->clientId }} {{ $data->firstName }} {{ $data->lastName }}</h5>
+                                <h6 class="card-subtitle mb-12 text-muted">{{ $data->levelName }}</h6>
+                            </div>
+                            <div class="col-6" style="text-align: right;">
+                                <div class="btn-group" role="group" aria-label="Basic example">
 
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-6">
-                        <h5 class="card-title"> {{ $data->clientId }} {{ $data->firstName }} {{ $data->lastName }}</h5>
-                        <h6 class="card-subtitle mb-12 text-muted">{{ $data->levelName }}</h6>
-                    </div>
-                    <div class="col-6" style="text-align: right;">
-                        <div class="btn-group" role="group" aria-label="Basic example">                            
-                            <button type="button" class="btn btn-primary" onclick="window.location = '/newEyesight/{{ $data->clientId }}'">New Eyesight</button>
-                            <button type="button" data-bs-target="#editClient" data-bs-toggle="modal" class="btn btn-primary">Edit</button>
-                            <!-- <button type="button" class="btn btn-primary">Right</button> -->
+                                    <button type="button" data-bs-target="#editClient" data-bs-toggle="modal" class="btn btn-primary">Edit</button>
+                                    <!-- <button type="button" class="btn btn-primary">Right</button> -->
+                                </div>
+
+                            </div>
                         </div>
-                       
+                        <p class="card-text">
+                        <div class="mb-3 row">
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Contact: </label>
+                            <div class="col-sm-10">
+                                <input type="text" readonly class="form-control-plaintext" value="{{ $data->contactNo }}">
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Birthdate: </label>
+                            <div class="col-sm-10">
+                                <input type="text" readonly class="form-control-plaintext" value="{{ $data->birthDate }}">
+                            </div>
+                        </div>
+                        </p>
+                        <!-- <button type="button" data-bs-target="#editClient" data-bs-toggle="modal" class="btn btn-primary">Edit</button> -->
                     </div>
                 </div>
-                <p class="card-text">
-                <div class="mb-3 row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Contact: </label>
-                    <div class="col-sm-10">
-                        <input type="text" readonly class="form-control-plaintext" value="{{ $data->contactNo }}">
+            </div>
+
+            <!--Eyesight Card-->
+            <div class="col-12 col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-6">
+                                <h5 class="card-title">Eyesight History</h5>
+                                <h6 class="card-subtitle mb-12 text-muted"></h6>
+                            </div>
+                            <div class="col-6" style="text-align: right;">
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <button type="button" class="btn btn-primary" onclick="window.location = '/newEyesight/{{ $data->clientId }}'">New Eyesight</button>
+                                </div>
+
+                            </div>
+                        </div>
+                        <p class="card-text">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col" style="width: 92pt">Date</th>
+                                    <th scope="col">Left</th>
+                                    <th scope="col">Right</th>
+                                    <th scope="col">Remark</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (count($eyeSightList) > 0)
+                                @foreach ($eyeSightList as $eyeSight)
+                                <tr>
+                                    <td scope="row">{{ $eyeSight->dateMeasure }} </td>
+                                    <td>{{ $eyeSight->leftEye }}</td>
+                                    <td>{{ $eyeSight->rightEye }}</td>
+                                    <td>{{ $eyeSight->remark }}</td>
+                                </tr>
+                                @endforeach
+                                @else
+                                <tr>
+                                    <td colspan="4">No eyesight history</td>
+                                </tr>
+                                @endif
+
+                            </tbody>
+                        </table>
+                        </p>
+                        <!-- <button type="button" data-bs-target="#editClient" data-bs-toggle="modal" class="btn btn-primary">Edit</button> -->
                     </div>
                 </div>
-                <div class="mb-3 row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Birthdate: </label>
-                    <div class="col-sm-10">
-                        <input type="text" readonly class="form-control-plaintext" value="{{ $data->birthDate }}">
-                    </div>
-                </div>
-                </p>
-                <!-- <button type="button" data-bs-target="#editClient" data-bs-toggle="modal" class="btn btn-primary">Edit</button> -->
             </div>
         </div>
     </div>
