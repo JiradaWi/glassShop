@@ -26,4 +26,17 @@ class eyeSightController extends BaseController
 
 		return view('newEyeSight', $data);
 	}
+
+	public function saveNewEyesight(Request $request){
+		\DB::table('eyesight')->insert([
+			'clientId'		=> $request->clientId,
+			'leftEye'		=> $request->leftEye,
+			'rightEye'		=> $request->rightEye,
+			'remark'		=> $request->remark,
+			'dateMeasure'	=> $request->dateMeasure
+		]);
+		
+		$response['status'] = 'SUCCESS';
+		return $response;
+	}
 }

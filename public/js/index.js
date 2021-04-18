@@ -5,7 +5,6 @@ function searchCustomer(event) {
         console.log('enter');
         var data = { keyword: searchText };
         $.ajax({
-            //url: 'http://localhost/laravel60/pet/petupdate',
             url: '/search',
             type: 'POST',
             data: data,
@@ -88,7 +87,7 @@ function submitNewCLient() {
             }
         },
         error: function (data) {
-            console.log('dead: '+data);
+            console.log('error: '+data);
         }
     });
 }

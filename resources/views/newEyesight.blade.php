@@ -21,7 +21,11 @@
     </style>
 </head>
 
-<body class="antialiased">
+<body class="antialiased" onload="init()">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="{{asset('js/newEyesight.js')}}"></script>
     @include('navbar')
 
     <div class="container">
@@ -34,24 +38,29 @@
                         <h5 class="card-title">
                             New Eye Sight for <b>{{ $data->firstName }} {{ $data->lastName }} </b>
                         </h5>
-
                     </div>
-
                 </div>
                 <p class="card-text">
+                    <input type="hidden" value="{{ $data->clientId }}" id="clientId" />
                 <div class="row">
                     <div class="col-6">
                         <div class="mb-3">
-                            <label for="leftEye" class="form-label">Left Eye</label>
+                            <label for="dateMeasure" class="form-label">Date Measure: </label>
+                            <input type="date" class="form-control" id="dateMeasure">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="leftEye" class="form-label">Left Eye: </label>
                             <input type="text" class="form-control" id="leftEye">
                         </div>
-
                     </div>
-
 
                     <div class="col-6">
                         <div class="mb-3">
-                            <label for="rightEye" class="form-label">Right Eye</label>
+                            <label for="rightEye" class="form-label">Right Eye: </label>
                             <input type="text" class="form-control" id="rightEye">
                         </div>
                     </div>
@@ -60,7 +69,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="mb-3">
-                            <label for="remark" class="form-label">Remark</label>
+                            <label for="remark" class="form-label">Remark: </label>
 
                             <textarea class="form-control" id="remark" rows="3"></textarea>
 
@@ -69,17 +78,14 @@
                 </div>
 
                 </p>
-                <button class="btn btn-primary">Save</button>
-                <button  class="btn btn-secondary" onclick="history.back()">Cancel</button>
+                <button class="btn btn-primary" onclick="saveEyesight()">Save</button>
+                <button class="btn btn-secondary" onclick="history.back()">Cancel</button>
             </div>
         </div>
     </div>
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 
-    <script type="text/javascript" src="{{asset('js/index.js')}}"></script>
 </body>
 
 </html>

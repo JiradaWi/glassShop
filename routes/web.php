@@ -16,12 +16,16 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::get('/', 'App\Http\Controllers\controller@index');
 
+//index
+Route::get('/', 'App\Http\Controllers\controller@index');
 Route::post('/search', 'App\Http\Controllers\controller@searchCustomer');
 Route::post('/newClient', 'App\Http\Controllers\controller@newClient');
 
+//client
 Route::get('/client/{clientId}', 'App\Http\Controllers\controller@viewClient');
 Route::post('/updateClient', 'App\Http\Controllers\controller@updateClient');
 
+//eyesight
 Route::get('/newEyesight/{clientId}', 'App\Http\Controllers\eyeSightController@newEyeSight');
+Route::post('/saveNewEyesight', 'App\Http\Controllers\eyeSightController@saveNewEyesight');
