@@ -29,3 +29,6 @@ Route::post('/updateClient', 'App\Http\Controllers\controller@updateClient');
 //eyesight
 Route::get('/newEyesight/{clientId}', 'App\Http\Controllers\eyeSightController@newEyeSight');
 Route::post('/saveNewEyesight', 'App\Http\Controllers\eyeSightController@saveNewEyesight');
+
+//order
+Route::get('/newOrder/{clientId}', 'App\Http\Controllers\orderController@newOrder');

@@ -90,6 +90,13 @@ class Controller extends BaseController
 			->orderBy('dateMeasure', 'desc')
 			->get();
 
+		$data['shoporder'] = \DB::table('shoporder')
+			->select('orderId', 'orderDate', 'totalPrice', 'statusName', 'shoporder.remark')
+			->leftjoin('orderstatus', 'orderstatus.orderStatusId', '=', 'shoporder.status')
+			->where('clientId', '=', $clientId)
+			->orderBy('orderId', 'desc')
+			->get();
+
 		return view('clientRecord', $data);
 	}
 

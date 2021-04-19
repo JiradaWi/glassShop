@@ -24,8 +24,6 @@
 <body class="antialiased">
     @include('navbar')
 
-
-
     <div class="container">
         <br />
         <div class="row">
@@ -61,10 +59,60 @@
                             </div>
                         </div>
                         </p>
-                        <!-- <button type="button" data-bs-target="#editClient" data-bs-toggle="modal" class="btn btn-primary">Edit</button> -->
+                    </div>
+                </div>
+                <br/>
+
+                <!--Order Card-->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-6">
+                                <h5 class="card-title">Order History</h5>
+                                <h6 class="card-subtitle mb-12 text-muted"></h6>
+                            </div>
+                            <div class="col-6" style="text-align: right;">
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <button type="button" class="btn btn-primary" onclick="window.location = '/newOrder/{{ $data->clientId }}'">New Order</button>
+                                </div>
+
+                            </div>
+                        </div>
+                        <p class="card-text">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col" style="width: 92pt">Order Id</th>
+                                    <th scope="col">Order Date</th>
+                                    <th scope="col">Total Price</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Remark</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (count($shoporder) > 0)
+                                @foreach ($shoporder as $order)
+                                <tr>
+                                    <td scope="row">{{ $order->orderId }} </td>
+                                    <td>{{ $order->orderDate }}</td>
+                                    <td>{{ $order->totalPrice }}</td>
+                                    <td>{{ $order->statusName }}</td>
+                                    <td>{{ $order->remark }}</td>
+                                </tr>
+                                @endforeach
+                                @else
+                                <tr>
+                                    <td colspan="5">No purchase history</td>
+                                </tr>
+                                @endif
+
+                            </tbody>
+                        </table>
+                        </p>
                     </div>
                 </div>
             </div>
+            <br />
 
             <!--Eyesight Card-->
             <div class="col-12 col-md-4">
@@ -111,16 +159,16 @@
                             </tbody>
                         </table>
                         </p>
-                        <!-- <button type="button" data-bs-target="#editClient" data-bs-toggle="modal" class="btn btn-primary">Edit</button> -->
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 
 
+
     <div class="modal fade" id="editClient" tabindex="-1" aria-labelledby="editClient" aria-hidden="true">
-        <!-- <form method="POST" action="/newClient"> -->
         <form id="editClientForm">
             @csrf
             <div class="modal-dialog modal-lg">
