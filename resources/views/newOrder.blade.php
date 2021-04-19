@@ -48,11 +48,14 @@
                     <div class="col-6">
                         <div class="mb-3">
                             <label for="status" class="form-label">Status: </label>
-                            <input type="text" class="form-control" id="status">
+                            <select class="form-select" id="status" name="customerLevel">
+                                @foreach ($status as $s)
+                                <option value="{{ $s->orderStatusId }}">{{ $s->statusName }}</option>                               
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                 </div>
-
 
                 </p>
                 <div style="width: 100%; text-align: right">

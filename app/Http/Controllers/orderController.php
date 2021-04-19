@@ -22,6 +22,12 @@ class orderController extends BaseController
             ->get();
 
         $data['data'] =  $clientData[0];
+
+        $data['status'] = \DB::table('orderstatus')
+            ->select('orderStatusId', 'statusName')
+            ->orderby('orderStatusId')
+            ->get();
+
         return view('newOrder', $data);
     }
 }
