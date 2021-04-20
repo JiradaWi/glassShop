@@ -42,4 +42,17 @@ class orderController extends BaseController
 
         return redirect()->route('clientRecord', $request->clientId);
     }
+
+    public function viewOrder($orderId){
+        $order = \DB::table('shoporder')
+        ->select('orderId', 'client.clientId', 'firstName', 'lastName', 'statusName', 'totalPrice', 'paymentMethod', 'shoporder.remark', 'orderDate')
+        ->leftjoin('client', 'client.clientId', '=', 'shoporder.clientId')
+        ->leftjoin('orderstatus', 'orderstatus.orderStatusId', '=', 'shoporder.status')
+        ->where('orderId', '=', $orderId)
+        ->limit(1)
+        ->get();
+
+        $response['orderDetail'] = $order[0];
+        return view('orderRecord', $response);
+    }
 }

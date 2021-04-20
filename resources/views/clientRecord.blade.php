@@ -92,7 +92,7 @@
                             <tbody>
                                 @if (count($shoporder) > 0)
                                 @foreach ($shoporder as $order)
-                                <tr>
+                                <tr onclick="window.location = '/order/{{$order->orderId}}'">
                                     <td scope="row">{{ $order->orderId }} </td>
                                     <td>{{ $order->orderDate }}</td>
                                     <td>{{ $order->totalPrice }}</td>
