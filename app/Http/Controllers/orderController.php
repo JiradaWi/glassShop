@@ -30,4 +30,16 @@ class orderController extends BaseController
 
         return view('newOrder', $data);
     }
+
+    public function saveOrder(Request $request){
+        \DB::table('shoporder')->insert([
+			'clientId'		=> $request->clientId,
+			'orderDate'		=> $request->orderDate,
+			'status'		=> $request->status,
+			'remark'		=> $request->remark
+		]);
+       // $url = '/client/'.$request->clientId;
+
+        return redirect()->route('clientRecord', $request->clientId);
+    }
 }

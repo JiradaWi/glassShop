@@ -23,7 +23,10 @@ Route::post('/search', 'App\Http\Controllers\controller@searchCustomer');
 Route::post('/newClient', 'App\Http\Controllers\controller@newClient');
 
 //client
-Route::get('/client/{clientId}', 'App\Http\Controllers\controller@viewClient');
+Route::get('/client/{clientId}', [
+    'as'    => 'clientRecord', 
+    'uses'  => 'App\Http\Controllers\controller@viewClient'
+    ]);
 Route::post('/updateClient', 'App\Http\Controllers\controller@updateClient');
 
 //eyesight
@@ -32,3 +35,4 @@ Route::post('/saveNewEyesight', 'App\Http\Controllers\eyeSightController@saveNew
 
 //order
 Route::get('/newOrder/{clientId}', 'App\Http\Controllers\orderController@newOrder');
+Route::post('/saveOrder', 'App\Http\Controllers\orderController@saveOrder');
