@@ -1,4 +1,4 @@
-function searchCustomer(event) {
+function searchCatalog(event) {
     console.log('search catalog');
     var searchText = event.target.value;
 

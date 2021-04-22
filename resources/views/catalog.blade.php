@@ -32,8 +32,8 @@
         <div class="mb-3">
             <div class="row">
                 <div class="col-10">
-                    <label for="searchCustomer" class="form-label">Search Catalog:</label>
-                    <input id="searchCustomer" type="text" class="form-control" aria-describedby="searchHelp" onkeyup="searchCustomer(event)" name="searchKeyword">
+                    <label for="searchCatalog" class="form-label">Search Catalog:</label>
+                    <input id="searchCatalog" type="text" class="form-control" aria-describedby="searchHelp" onkeyup="searchCatalog(event)" name="searchKeyword">
                     <div id="searchHelp" class="form-text">Search by name.</div>
                 </div>
                 <div class="col-2">
@@ -72,7 +72,58 @@
         </table>
     </div>
 
+    <!-- New Catalog Card -->
+    <div class="modal fade" id="newCatalog" tabindex="-1" aria-labelledby="newCatalog" aria-hidden="true">
+        <form id="newCatalogForm">
+            @csrf
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="newCustomer">New Catalog</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Name:</label>
+                                    <input type="text" class="form-control" id="name" name="name" value="">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="mb-3">
+                                    <label for="basePrice" class="form-label">Base Price:</label>
+                                    <input type="text" class="form-control" id="basePrice" name="basePrice" value="">
+                                </div>
+                            </div>
+                        </div>
 
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="isActive" checked>
+                                    <label class="form-check-label" for="isActive">
+                                        Active
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                                <label for="remark" class="form-label">Remark:</label>
+                                <textarea class="form-control" id="remark" rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeNewClientBtn">Close</button>
+                        <button type="button" onclick="updateClient()" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 
 
 
