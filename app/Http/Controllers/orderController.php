@@ -45,7 +45,7 @@ class orderController extends BaseController
 
     public function viewOrder($orderId){
         $order = \DB::table('shoporder')
-        ->select('orderId', 'client.clientId', 'firstName', 'lastName', 'statusName', 'totalPrice', 'paymentMethod', 'shoporder.remark', 'orderDate')
+        ->select('orderId', 'client.clientId', 'firstName', 'lastName', 'statusName', 'totalPrice', 'paymentMethod', 'shoporder.remark', 'orderDate', 'orderFinishDate')
         ->leftjoin('client', 'client.clientId', '=', 'shoporder.clientId')
         ->leftjoin('orderstatus', 'orderstatus.orderStatusId', '=', 'shoporder.status')
         ->where('orderId', '=', $orderId)

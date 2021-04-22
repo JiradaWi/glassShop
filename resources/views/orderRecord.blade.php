@@ -53,9 +53,29 @@
                     </div>
                     <div class="col-6">
                         <div class="row">
-                            <label for="staticEmail" class="col-sm-3 col-form-label">Total Price: </label>
+                            <label for="staticEmail" class="col-sm-3 col-form-label">Order Finish Date: </label>
+                            <div class="col-sm-9">
+                                <input type="text" readonly class="form-control-plaintext" value="{{ $orderDetail->orderFinishDate }}">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="row">
+                            <label for="staticEmail" class="col-sm-3 col-form-label"> Total Price: </label>
                             <div class="col-sm-9    ">
                                 <input type="text" readonly class="form-control-plaintext" value="{{ $orderDetail->totalPrice }}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="row">
+                            <label for="staticEmail" class="col-sm-3 col-form-label"> Payment Method: </label>
+                            <div class="col-sm-9    ">
+                                <input type="text" readonly class="form-control-plaintext" value="{{ $orderDetail->paymentMethod }}">
                             </div>
                         </div>
                     </div>
@@ -64,26 +84,25 @@
                     <div class="col-6">
                         <div class="row">
                             <label for="staticEmail" class="col-sm-3 col-form-label">Status: </label>
-                            <div class="col-sm-9">
-                                <input type="text" readonly class="form-control-plaintext" value="{{ $orderDetail->statusName }}">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="row">
-                            <label for="staticEmail" class="col-sm-3 col-form-label">Total Price: </label>
                             <div class="col-sm-9    ">
-                                <input type="text" readonly class="form-control-plaintext" value="{{ $orderDetail->totalPrice }}">
+                                <input type="text" readonly class="form-control-plaintext" value="{{ $orderDetail->statusName }}">
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="row">
-                    <label for="staticEmail" class="col-sm-3 col-form-label">Remark: </label>
-                    <div class="col-sm-9    ">
-                        <input type="text" readonly class="form-control-plaintext" value="{{ $orderDetail->remark }}">
+
+                    <div class="col-12">
+                        <div class="row">
+                        <label for="staticEmail" class="col-sm-3 col-form-label">Remark: </label>
+                            <div class="col-sm-9">
+                            <input type="text" readonly class="form-control-plaintext" value="{{ $orderDetail->remark }}">
+                            </div>
+                        </div>
                     </div>
+                   
+                  
                 </div>
                 </p>
             </div>
