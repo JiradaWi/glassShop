@@ -38,3 +38,7 @@ Route::get('/newOrder/{clientId}', 'App\Http\Controllers\orderController@newOrde
 Route::get('/order/{order}', 'App\Http\Controllers\orderController@viewOrder');
 Route::post('/saveOrder', 'App\Http\Controllers\orderController@saveOrder');
 Route::post('/updateOrder', 'App\Http\Controllers\orderController@updateOrder');
+
+//catalog
+Route::get('/catalog', 'App\Http\Controllers\catalogController@index');
+Route::post('/searchCatalog', 'App\Http\Controllers\catalogController@searchCatalog');

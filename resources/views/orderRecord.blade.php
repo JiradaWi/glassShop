@@ -23,6 +23,8 @@
 
 <body class="antialiased">
     @include('navbar')
+    @csrf
+    
     <div class="container">
         <br />
         <div class="card">
@@ -104,10 +106,35 @@
                 </p>
             </div>
         </div>
+
+        <br />
+
+        <!-- Order Item Card -->
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <h5 class="card-title"> Order Item</h5>
+                        <h6 class="card-subtitle mb-12 text-muted"></h6>
+                    </div>
+                    <div class="col-6" style="text-align: right;">
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" data-bs-target="#orderItem" data-bs-toggle="modal" class="btn btn-primary">New Order Item</button>
+                            <!-- <button type="button" class="btn btn-primary">Edit</button> -->
+                        </div>
+
+                    </div>
+                </div>
+                <p class="card-text">
+                    // Order Item Table
+
+                </p>
+            </div>
+        </div>
     </div>
 
 
-    @csrf
+   
     <!-- Edit Order Modal -->
     <div class="modal fade" id="editOrder" tabindex="-1" aria-labelledby="editOrder" aria-hidden="true">
         <div class="modal-dialog modal-lg">

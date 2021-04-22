@@ -9,6 +9,9 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/">Search Customer</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/catalog">Catalog Management</a>
+                </li>
                 <!-- <li class="nav-item">
                     <a class="nav-link" href="#">Link</a>
                 </li>
