@@ -42,3 +42,5 @@ Route::post('/updateOrder', 'App\Http\Controllers\orderController@updateOrder');
 //catalog
 Route::get('/catalog', 'App\Http\Controllers\catalogController@index');
 Route::post('/searchCatalog', 'App\Http\Controllers\catalogController@searchCatalog');
+Route::post('/newCatalog', 'App\Http\Controllers\catalogController@newCatalog');
+//Route::get('/catalogDetail', 'App\Http\Controllers\catalogController@index');

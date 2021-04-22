@@ -101,7 +101,7 @@
                         <div class="row">
                             <div class="col-md-6 col-sm-6">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="isActive" checked>
+                                    <input class="form-check-input" type="checkbox" name="isActive" id="isActive" checked>
                                     <label class="form-check-label" for="isActive">
                                         Active
                                     </label>
@@ -118,7 +118,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeNewClientBtn">Close</button>
-                        <button type="button" onclick="updateClient()" class="btn btn-primary">Save</button>
+                        <button type="button" onclick="newCatalog()" class="btn btn-primary">Save</button>
                     </div>
                 </div>
             </div>

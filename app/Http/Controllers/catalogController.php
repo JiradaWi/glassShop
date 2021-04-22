@@ -34,4 +34,20 @@ class catalogController extends Controller
             return $data;
         }
     }
+
+    public function newCatalog(Request $request){
+        \DB::table('catalog')->insert([
+			'name'		    => $request->name,
+			'basePrice'		=> $request->basePrice,
+			'remark'		=> $request->remark,
+			'isActive'		=> $request->isActive
+		]);
+
+        $data['data'] = \DB::table('catalog')
+            ->select('name', 'basePrice', 'remark', 'isActive', 'itemId')
+            ->get();
+
+        return $data;
+
+    }
 }
