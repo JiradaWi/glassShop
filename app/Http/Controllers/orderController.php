@@ -45,7 +45,7 @@ class orderController extends BaseController
 
     public function viewOrder($orderId){
         $order = \DB::table('shoporder')
-        ->select('orderId', 'client.clientId', 'firstName', 'lastName', 'statusName', 'totalPrice', 'paymentMethod', 'shoporder.remark', 'orderDate', 'orderFinishDate')
+        ->select('orderId', 'client.clientId', 'firstName', 'lastName', 'statusName', 'totalPrice', 'paymentMethod', 'shoporder.remark', 'orderDate', 'orderFinishDate', 'shoporder.status')
         ->leftjoin('client', 'client.clientId', '=', 'shoporder.clientId')
         ->leftjoin('orderstatus', 'orderstatus.orderStatusId', '=', 'shoporder.status')
         ->where('orderId', '=', $orderId)
@@ -53,6 +53,27 @@ class orderController extends BaseController
         ->get();
 
         $response['orderDetail'] = $order[0];
+
+        $response['statusName'] = \DB::table('orderStatus')
+        ->select('statusName', 'orderStatusId')
+        ->get();
         return view('orderRecord', $response);
+    }
+
+    public function updateOrder(Request $request){
+        \DB::table('shoporder')
+        ->where('orderId', $request->orderId)
+        ->update(
+            array(
+                'orderDate'         => $request->orderDate,
+                'orderFinishDate'   => $request->orderFinishDate,
+                'paymentMethod'     => $request->paymentMethod,
+                'status'            => $request->status,
+                'remark'            => $request->remark
+            )
+        );
+
+        $data['status'] = 'SUCCESS';
+		return $data;
     }
 }

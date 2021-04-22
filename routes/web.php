@@ -37,3 +37,4 @@ Route::post('/saveNewEyesight', 'App\Http\Controllers\eyeSightController@saveNew
 Route::get('/newOrder/{clientId}', 'App\Http\Controllers\orderController@newOrder');
 Route::get('/order/{order}', 'App\Http\Controllers\orderController@viewOrder');
 Route::post('/saveOrder', 'App\Http\Controllers\orderController@saveOrder');
+Route::post('/updateOrder', 'App\Http\Controllers\orderController@updateOrder');
