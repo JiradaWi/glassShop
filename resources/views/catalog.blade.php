@@ -54,7 +54,7 @@
             </thead>
             <tbody id="catalogDetail">
                 @foreach ($data as $d)
-                <tr>
+                <tr onclick="location.href='/catalogDetail/{{ $d->itemId }}'">
                     <td> {{ $d->itemId }} </td>
                     <td> {{ $d->name }} </td>
                     <td> {{ $d->basePrice }} </td>

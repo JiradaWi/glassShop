@@ -26,7 +26,7 @@ function searchCatalog(event) {
 
                     var tabledetail = '';
                     for (var i = 0; i < response.data.length; i++) {
-                        tabledetail += '<tr onclick="location.href=\'/catalog/' + data[i].itemId + '\'">';
+                        tabledetail += '<tr onclick="location.href=\'/catalogDetail/' + data[i].itemId + '\'">';
                         tabledetail += '<td>' + data[i].itemId + '</td>';
                         tabledetail += '<td>' + data[i].name + '</td>';
                         tabledetail += '<td>' + data[i].basePrice + '</td>';
@@ -51,6 +51,40 @@ function searchCatalog(event) {
 
         });
     }
+}
+
+function updateCatalog(){
+    var isActive = 0;
+    if(document.getElementById('isActive').checked){
+        isActive = 1;
+    }
+    var data = {
+        itemId      : document.getElementById('itemId').value,
+        name        : document.getElementById('name').value,
+        basePrice   : document.getElementById('basePrice').value,
+        isActive    : isActive,
+        remark      : document.getElementById('remark').value
+    };
+    $.ajax({
+        url: '/updateCatalog',
+        type: 'POST',
+        data: data,
+        cache: false,
+        //method: 'post',
+        dataType: 'json',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function (response) {
+            if (response.status == 'success') {
+                location.reload();
+            }
+        },
+        error: function (data) {
+            console.log(JSON.stringify(data));
+        }
+
+    });
 }
 
 function newCatalog(){
@@ -83,7 +117,7 @@ function newCatalog(){
 
                 var tabledetail = '';
                 for (var i = 0; i < response.data.length; i++) {
-                    tabledetail += '<tr onclick="location.href=\'/catalog/' + data[i].itemId + '\'">';
+                    tabledetail += '<tr onclick="location.href=\'/catalogDetail/' + data[i].itemId + '\'">';
                     tabledetail += '<td>' + data[i].itemId + '</td>';
                     tabledetail += '<td>' + data[i].name + '</td>';
                     tabledetail += '<td>' + data[i].basePrice + '</td>';
