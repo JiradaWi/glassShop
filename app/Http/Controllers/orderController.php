@@ -64,6 +64,10 @@ class orderController extends BaseController
         ->where('orderId', '=', $orderId)
         ->get();
 
+        $response['catalog'] = \DB::table('catalog')
+        ->select('name', 'itemId')
+        ->where('isActive', '=', '1')
+        ->get();
         return view('orderRecord', $response);
     }
 

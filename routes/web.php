@@ -45,3 +45,4 @@ Route::post('/searchCatalog', 'App\Http\Controllers\catalogController@searchCata
 Route::post('/newCatalog', 'App\Http\Controllers\catalogController@newCatalog');
 Route::get('/catalogDetail/{itemId}', 'App\Http\Controllers\catalogController@viewCatalog');
 Route::post('/updateCatalog', 'App\Http\Controllers\catalogController@updateCatalog');
+Route::post('/retrievePrice', 'App\Http\Controllers\catalogController@retrievePrice');

@@ -80,4 +80,15 @@ class catalogController extends Controller
 
         return $data;
     }
+
+    public function retrievePrice(Request $request){
+        $catalog = \DB::table('catalog')
+        ->select('name', 'basePrice', 'remark', 'isActive', 'itemId')
+        ->where('itemId', '=', $request->catalogId)
+        ->get();
+        $data['status'] = 'SUCCESS';
+        $data['catalog'] = $catalog[0];
+
+        return $data;
+    }
 }

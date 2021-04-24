@@ -1,13 +1,13 @@
-function updateOrder(){
+function updateOrder() {
     console.log('submit form');
     var orderId = document.getElementById("orderId").value;
     var data = {
-        orderId:            orderId,
-        orderDate:          document.getElementById("orderDate").value,
-        status:             document.getElementById("status").value,
-        orderFinishDate:    document.getElementById("orderFinishDate").value,
-        remark:             document.getElementById("remark").value,       
-        paymentMethod:      document.getElementById("paymentMethod").value,       
+        orderId: orderId,
+        orderDate: document.getElementById("orderDate").value,
+        status: document.getElementById("status").value,
+        orderFinishDate: document.getElementById("orderFinishDate").value,
+        remark: document.getElementById("remark").value,
+        paymentMethod: document.getElementById("paymentMethod").value,
     };
 
     $.ajax({
@@ -19,16 +19,50 @@ function updateOrder(){
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        success: function (response) {      
-            console.log('response.status: '+response.status);     
+        success: function (response) {
+            console.log('response.status: ' + response.status);
             if (response.status == 'SUCCESS') {
-                window.location.href = '/order/'+orderId;
-            }else{
-                console.log('dead: '+JSON.stringify(response));
+                window.location.href = '/order/' + orderId;
+            } else {
+                console.log('dead: ' + JSON.stringify(response));
             }
         },
         error: function (data) {
-            console.log('dead: '+JSON.stringify(data));
+            console.log('dead: ' + JSON.stringify(data));
+        }
+    });
+}
+
+function getPrice() {
+    var catalogId = document.getElementById("catalogId").value;
+    console.log('retrieve price: ' + catalogId);
+    if (catalogId == '-') {
+        return;
+    }
+
+    var data = {
+        catalogId: catalogId
+    };
+
+    $.ajax({
+        url: '/retrievePrice',
+        type: 'POST',
+        data: data,
+        cache: false,
+        dataType: 'json',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function (response) {
+            console.log('response.status: ' + response.status);
+            if (response.status == 'SUCCESS') {
+                document.getElementById('salesPrice').value = response.catalog.basePrice;
+            } else {
+                console.log('dead: ' + JSON.stringify(response));
+            }
+        },
+        error: function (data) {
+            console.log('dead: ' + JSON.stringify(data));
         }
     });
 }

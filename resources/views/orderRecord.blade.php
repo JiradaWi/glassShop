@@ -119,7 +119,7 @@
                     </div>
                     <div class="col-6" style="text-align: right;">
                         <div class="btn-group" role="group" aria-label="Basic example">
-                            <button type="button" data-bs-target="#orderItem" data-bs-toggle="modal" class="btn btn-primary">New Order Item</button>
+                            <button type="button" data-bs-target="#newOrderItem" data-bs-toggle="modal" class="btn btn-primary">New Order Item</button>
                             <!-- <button type="button" class="btn btn-primary">Edit</button> -->
                         </div>
 
@@ -222,6 +222,46 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="modal fade" id="newOrderItem" tabindex="-1" aria-labelledby="newOrderItem" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="newCustomer">New Order Item</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" class="form-control" id="orderId" name="orderId" value="{{ $orderDetail->orderId }}">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                            <div class="mb-3">
+                                <label for="item" class="form-label">Item:</label>
+                                <select class="form-select" onchange="getPrice()" id="catalogId">
+                                <option value="-">-</option>
+                                @foreach($catalog as $c)
+                                <option value="{{$c->itemId}}">{{$c->name}}</option>
+                                @endforeach
+                                </select>
+                                <!-- <input type="text" class="form-control" value=""> -->
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="mb-3">
+                                <label for="salesPrice" class="form-label">Sales Price:</label>
+                                <input type="text" class="form-control"  value="" name="salesPrice" id="salesPrice">
+                            </div>
+                        </div>
+                    </div>
+                  
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeNewClientBtn">Close</button>
+                        <button type="button" onclick="updateOrder()" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
         <!-- <script type="text/javascript" src="{{asset('js/newOrder.js')}}"></script> -->
