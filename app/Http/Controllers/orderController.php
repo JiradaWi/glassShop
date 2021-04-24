@@ -62,7 +62,7 @@ class orderController extends BaseController
 
         $response['orderitem'] = \DB::table('orderitem')
             ->select('orderItemId', 'catalogId', 'price', 'name')
-            ->join('catalog', 'catalog.itemId', '=', 'orderitem.orderItemId')
+            ->join('catalog', 'catalog.itemId', '=', 'orderitem.catalogId')
             ->where('orderId', '=', $orderId)
             ->get();
 
@@ -94,7 +94,7 @@ class orderController extends BaseController
     public function newOrderItem(Request $request)
     {
         \DB::table('orderitem')->insert([
-            'orderId'        => $request->orderId,
+            'orderId'           => $request->orderId,
             'catalogId'        => $request->catalogId,
             'price'            => $request->salesPrice
         ]);
