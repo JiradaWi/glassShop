@@ -57,6 +57,13 @@ class orderController extends BaseController
         $response['statusName'] = \DB::table('orderStatus')
         ->select('statusName', 'orderStatusId')
         ->get();
+
+        $response['orderitem'] = \DB::table('orderitem')
+        ->select('orderItemId', 'catalogId', 'price', 'name')
+        ->join('catalog', 'catalog.itemId', '=', 'orderitem.orderItemId')
+        ->where('orderId', '=', $orderId)
+        ->get();
+
         return view('orderRecord', $response);
     }
 

@@ -24,7 +24,7 @@
 <body class="antialiased">
     @include('navbar')
     @csrf
-    
+
     <div class="container">
         <br />
         <div class="card">
@@ -96,8 +96,8 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="row">
-                            <label for="staticEmail" class="col-sm-3 col-form-label">Remark: </label>
-                            <div class="col-sm-9">
+                            <label for="staticEmail" class="col-sm-2 col-form-label">Remark: </label>
+                            <div class="col-sm-10">
                                 <input type="text" readonly class="form-control-plaintext" value="{{ $orderDetail->remark }}">
                             </div>
                         </div>
@@ -126,7 +126,31 @@
                     </div>
                 </div>
                 <p class="card-text">
-                    // Order Item Table
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col" style="width: 92pt">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (count($orderitem) > 0)
+                        @foreach ($orderitem as $item)
+                        <tr>
+                            <td scope="row">{{ $item->orderItemId }} </td>
+                            <td>{{ $item->name }}</td>
+                            <td>{{ $item->price }}</td>
+                        </tr>
+                        @endforeach
+                        @else
+                        <tr>
+                            <td colspan="3">No order item recorded.</td>
+                        </tr>
+                        @endif
+
+                    </tbody>
+                </table>
 
                 </p>
             </div>
@@ -134,7 +158,7 @@
     </div>
 
 
-   
+
     <!-- Edit Order Modal -->
     <div class="modal fade" id="editOrder" tabindex="-1" aria-labelledby="editOrder" aria-hidden="true">
         <div class="modal-dialog modal-lg">
