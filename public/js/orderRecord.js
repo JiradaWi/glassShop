@@ -34,8 +34,7 @@ function updateOrder() {
 }
 
 function getPrice() {
-    var catalogId = document.getElementById("catalogId").value;
-    console.log('retrieve price: ' + catalogId);
+    var catalogId = document.getElementById("catalogId").value; 
     if (catalogId == '-') {
         return;
     }
@@ -53,8 +52,7 @@ function getPrice() {
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        success: function (response) {
-            console.log('response.status: ' + response.status);
+        success: function (response) {           
             if (response.status == 'SUCCESS') {
                 document.getElementById('salesPrice').value = response.catalog.basePrice;
             } else {
