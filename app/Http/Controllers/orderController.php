@@ -31,60 +31,87 @@ class orderController extends BaseController
         return view('newOrder', $data);
     }
 
-    public function saveOrder(Request $request){
+    public function saveOrder(Request $request)
+    {
         \DB::table('shoporder')->insert([
-			'clientId'		=> $request->clientId,
-			'orderDate'		=> $request->orderDate,
-			'status'		=> $request->status,
-			'remark'		=> $request->remark
-		]);
-       // $url = '/client/'.$request->clientId;
+            'clientId'        => $request->clientId,
+            'orderDate'        => $request->orderDate,
+            'status'        => $request->status,
+            'remark'        => $request->remark
+        ]);
+        // $url = '/client/'.$request->clientId;
 
         return redirect()->route('clientRecord', $request->clientId);
     }
 
-    public function viewOrder($orderId){
+    public function viewOrder($orderId)
+    {
         $order = \DB::table('shoporder')
-        ->select('orderId', 'client.clientId', 'firstName', 'lastName', 'statusName', 'totalPrice', 'paymentMethod', 'shoporder.remark', 'orderDate', 'orderFinishDate', 'shoporder.status')
-        ->leftjoin('client', 'client.clientId', '=', 'shoporder.clientId')
-        ->leftjoin('orderstatus', 'orderstatus.orderStatusId', '=', 'shoporder.status')
-        ->where('orderId', '=', $orderId)
-        ->limit(1)
-        ->get();
+            ->select('orderId', 'client.clientId', 'firstName', 'lastName', 'statusName', 'totalPrice', 'paymentMethod', 'shoporder.remark', 'orderDate', 'orderFinishDate', 'shoporder.status')
+            ->leftjoin('client', 'client.clientId', '=', 'shoporder.clientId')
+            ->leftjoin('orderstatus', 'orderstatus.orderStatusId', '=', 'shoporder.status')
+            ->where('orderId', '=', $orderId)
+            ->limit(1)
+            ->get();
 
         $response['orderDetail'] = $order[0];
 
         $response['statusName'] = \DB::table('orderStatus')
-        ->select('statusName', 'orderStatusId')
-        ->get();
+            ->select('statusName', 'orderStatusId')
+            ->get();
 
         $response['orderitem'] = \DB::table('orderitem')
-        ->select('orderItemId', 'catalogId', 'price', 'name')
-        ->join('catalog', 'catalog.itemId', '=', 'orderitem.orderItemId')
-        ->where('orderId', '=', $orderId)
-        ->get();
+            ->select('orderItemId', 'catalogId', 'price', 'name')
+            ->join('catalog', 'catalog.itemId', '=', 'orderitem.orderItemId')
+            ->where('orderId', '=', $orderId)
+            ->get();
 
         $response['catalog'] = \DB::table('catalog')
-        ->select('name', 'itemId')
-        ->where('isActive', '=', '1')
-        ->get();
+            ->select('name', 'itemId')
+            ->where('isActive', '=', '1')
+            ->get();
         return view('orderRecord', $response);
     }
 
-    public function updateOrder(Request $request){
+    public function updateOrder(Request $request)
+    {
         \DB::table('shoporder')
-        ->where('orderId', $request->orderId)
-        ->update(
-            array(
-                'orderDate'         => $request->orderDate,
-                'orderFinishDate'   => $request->orderFinishDate,
-                'paymentMethod'     => $request->paymentMethod,
-                'status'            => $request->status,
-                'remark'            => $request->remark
-            )
-        );
+            ->where('orderId', $request->orderId)
+            ->update(
+                array(
+                    'orderDate'         => $request->orderDate,
+                    'orderFinishDate'   => $request->orderFinishDate,
+                    'paymentMethod'     => $request->paymentMethod,
+                    'status'            => $request->status,
+                    'remark'            => $request->remark
+                )
+            );
 
         $data['status'] = 'SUCCESS';
-		return $data;
+        return $data;
+    }
+
+    public function newOrderItem(Request $request)
+    {
+        \DB::table('orderitem')->insert([
+            'orderId'        => $request->orderId,
+            'catalogId'        => $request->catalogId,
+            'price'            => $request->salesPrice
+        ]);
+
+        $price = \DB::table('orderitem')
+            ->where('orderId', $request->orderId)
+            ->sum('price');
+
+        \DB::table('shoporder')
+            ->where('orderId', $request->orderId)
+            ->update(
+                array(
+                    'totalPrice'         => $price
+                )
+            );
+
+        $data['status'] = 'SUCCESS';
+        return $data;
     }
 }

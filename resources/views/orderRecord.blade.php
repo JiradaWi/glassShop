@@ -256,7 +256,7 @@
                   
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeNewClientBtn">Close</button>
-                        <button type="button" onclick="updateOrder()" class="btn btn-primary">Save</button>
+                        <button type="button" onclick="newOrderItem()" class="btn btn-primary">Save</button>
                     </div>
                 </div>
             </div>

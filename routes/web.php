@@ -39,6 +39,9 @@ Route::get('/order/{order}', 'App\Http\Controllers\orderController@viewOrder');
 Route::post('/saveOrder', 'App\Http\Controllers\orderController@saveOrder');
 Route::post('/updateOrder', 'App\Http\Controllers\orderController@updateOrder');
 
+//OrderItem 
+Route::post('/newOrderItem', 'App\Http\Controllers\orderController@newOrderItem');
+
 //catalog
 Route::get('/catalog', 'App\Http\Controllers\catalogController@index');
 Route::post('/searchCatalog', 'App\Http\Controllers\catalogController@searchCatalog');

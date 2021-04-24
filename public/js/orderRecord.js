@@ -64,3 +64,32 @@ function getPrice() {
         }
     });
 }
+
+function newOrderItem(){
+    var data = {
+        orderId: document.getElementById('orderId').value,
+        catalogId: document.getElementById('catalogId').value,
+        salesPrice: document.getElementById('salesPrice').value
+    };
+
+    $.ajax({
+        url: '/newOrderItem',
+        type: 'POST',
+        data: data,
+        cache: false,
+        dataType: 'json',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function (response) {           
+            if (response.status == 'SUCCESS') {
+               location.reload();
+            } else {
+                console.log('dead: ' + JSON.stringify(response));
+            }
+        },
+        error: function (data) {
+            console.log('dead: ' + JSON.stringify(data));
+        }
+    });
+}
