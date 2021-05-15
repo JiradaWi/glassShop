@@ -173,13 +173,13 @@
                         <div class="col-md-6 col-sm-6">
                             <div class="mb-3">
                                 <label for="firstName" class="form-label">Order Date:</label>
-                                <input type="text" class="form-control" id="orderDate" name="orderDate" value="{{ $orderDetail->orderDate }}">
+                                <input type="date" class="form-control" id="orderDate" name="orderDate" value="{{ $orderDetail->orderDate }}">
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-6">
                             <div class="mb-3">
                                 <label for="lastName" class="form-label">Order Finish Date:</label>
-                                <input type="text" class="form-control" id="orderFinishDate" name="orderFinishDate" value="{{ $orderDetail->orderFinishDate }}">
+                                <input type="date" class="form-control" id="orderFinishDate" name="orderFinishDate" value="{{ $orderDetail->orderFinishDate }}">
                             </div>
                         </div>
                     </div>
